@@ -1,11 +1,13 @@
 //src>components>SignInBtn.jsx
 
+import { APP_BASE_URL } from '../settting';
 import { supabase } from '../supabaseClient';
 
 function SignInBtn() {
   const signInWithGithub = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
+      redirectTo: APP_BASE_URL,
     });
   };
 
