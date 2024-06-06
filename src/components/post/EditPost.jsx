@@ -55,9 +55,12 @@ function EditPost({ targetData, setTargetData, setIsEdit, postId }) {
       <label className="mb-4 mt-4 font-bold">제목</label>
       <input className="h-[6vh] mb-6" type="text" value={title} name="title" onChange={onChangeHandler} />
       <label className="mb-4 font-bold">내용</label>
-      {imageUrls.length > 0
-        ? imageUrls.map((url, index) => <img className="w-48" key={index} src={url} alt={`post-image-${index}`} />)
-        : null}
+      <div className="flex">
+        {imageUrls.length > 0
+          ? imageUrls.map((url, index) => <img className="w-48" key={index} src={url} alt={`post-image-${index}`} />)
+          : null}
+      </div>
+
       <textarea
         className="h-[30vh] mb-4 resize-none"
         type="text"

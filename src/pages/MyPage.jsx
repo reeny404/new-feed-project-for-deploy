@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 import api from '../api/api';
 import DefaultProfileUrl from '../assets/profile.png';
 import PostList from '../components/PostList';
@@ -95,10 +94,10 @@ function MyPage() {
   };
 
   return (
-    <MyPageCon>
-      <MyPageArea>
-        <ProfileArea>
-          <ProfileIcon>
+    <>
+      <div className="min-w-full max-w-full h-[100vh] flex items-center justify-center flex-col">
+        <div className="min-w-full max-w-full h-2/10 flex items-center justify-center">
+          <div className="w-44 h-44 flex items-center justify-center rounded-full my-0 mr-5 ">
             {profileUrl ? (
               <img src={profileUrl} className="rounded-full h-full w-full" />
             ) : (
@@ -117,84 +116,19 @@ function MyPage() {
                 />
               </>
             )}
-          </ProfileIcon>
-          <ProfileInfo>
-            <ProfileId>{user && user.email}</ProfileId>
-            <BlackHr1px />
-            <ProfilePreview>내가 쓴 글 {myPosts.length}개</ProfilePreview>
-          </ProfileInfo>
-        </ProfileArea>
-        <PostArea>
+          </div>
+          <div className="w-2/5">
+            <div className="font-semibold text-xl">{user && user.email}</div>
+            <div className="bg-black h-0.5 mt-1 mb-0.5" />
+            <div className="font-semibold text-base">내가 쓴 글 {myPosts.length}개</div>
+          </div>
+        </div>
+        <div className="min-w-full max-w-full h-4/5 mt-14 bg-gray-100">
           <PostList title="내가 작성한 글" list={myPosts} />
-        </PostArea>
-      </MyPageArea>
-    </MyPageCon>
+        </div>
+      </div>
+    </>
   );
 }
-
-const MyPageCon = styled.div`
-  color: black;
-`;
-
-const MyPageArea = styled.div`
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ProfileArea = styled.form`
-  min-width: 100%;
-  max-width: 100%;
-  max-height: 20vh;
-  display: flex;
-  align-items: center;
-`;
-
-const ProfileIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background-color: gray;
-  margin: 0 5% 0 12%;
-`;
-// W/H 26% 씩으로 해도 됨.
-
-const ProfileInfo = styled.div`
-  width: 40%;
-`;
-
-const ProfileId = styled.div`
-  padding: 0 0 0 3%;
-  font-size: 35px;
-  font-weight: 600;
-`;
-
-const ProfilePreview = styled.div`
-  padding: 0 0 0 3%;
-  font-size: 20px;
-  font-weight: 550;
-`;
-
-const BlackHr1px = styled.div`
-  margin: 10px 0 10px 0;
-  background: #000;
-  height: 1px;
-  border: none;
-`;
-
-const PostArea = styled.div`
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 70vh;
-  margin-top: 80px;
-  background: #f3f4f6;
-`;
 
 export default MyPage;
