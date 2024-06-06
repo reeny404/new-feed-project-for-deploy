@@ -1,0 +1,33 @@
+/* Input.css */
+
+/* 기본 placeholder 색상 */
+::placeholder {
+  color: gray; /* 기본 placeholder 텍스트 색상 */
+  opacity: 1; /* 일부 브라우저에서 기본적으로 반투명 설정이 되어 있으므로 명확하게 설정합니다 */
+}
+
+input::placeholder {
+  color: gray; /* input 요소의 기본 placeholder 색상 */
+}
+
+textarea::placeholder {
+  color: gray; /* textarea 요소의 기본 placeholder 색상 */
+}
+
+/* 오류가 있는 경우의 placeholder 색상 설정 */
+input.placeholder-red-500::placeholder {
+  color: red;
+}
+
+textarea.placeholder-red-500::placeholder {
+  color: red;
+}
+
+/* 오류가 있는 경우의 border 색상 설정 */
+input.border-red-500 {
+  border-color: red;
+}
+
+textarea.border-red-500 {
+  border-color: red;
+}
