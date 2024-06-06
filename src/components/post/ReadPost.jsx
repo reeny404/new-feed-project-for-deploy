@@ -65,7 +65,7 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
     };
 
     checkLiked();
-  }, [isLoggedIn, postId, userId]);
+  }, [isLoggedIn, postId, userId, liked]);
 
   //like 수 가져오기
   useEffect(() => {
@@ -116,11 +116,8 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
       console.error(error);
     } else {
       const { data: postData, error: postError } = await supabase
-        //posts 테이블에서
         .from('POSTS')
-        // like 컬럼
         .select('like')
-        //
         .eq('id', postId)
         .single();
 
@@ -221,7 +218,7 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
         <ReactionDiv $isLiked={liked}>
           <div className="mb-3 font-bold">조회수 : {view}</div>
           <div className="font-bold">
-            <FontAwesomeIcon icon="fa-solid fa-heart" className="heart" onClick={isLikedHandler} /> {likeCount}
+            <FontAwesomeIcon icon="fa-solid fa-heart" className="heart" onClick={isLikedHandler} /> {like}
           </div>
         </ReactionDiv>
         <div className="flex-row font-bold">
