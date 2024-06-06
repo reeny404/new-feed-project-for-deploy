@@ -9,7 +9,7 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
   const navigate = useNavigate();
   const signedInUser = useSelector((state) => state.auth.signedInUser);
 
-  const { id, title, content, name, view, date, time, like, tag, image_url, user_id } = targetData;
+  const { id, title, content, name, view, created_at, like, tag, image_url, user_id } = targetData;
   const postUserId = user_id;
 
   //!!: 값을 boolean 형태로
@@ -184,20 +184,30 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
     }
   }, [postId, view]);
 
+  //글 작성 버튼 눌렀을 경우의 유효성검사 및 로그인 페이지로 이동
+  const onMoveToCreatePost = () => {
+    if (!isLoggedIn) {
+      if (confirm('로그인 후 이용 가능합니다. 로그인 하시겠어요?')) {
+        return navigate('/login');
+      } else {
+        return;
+      }
+    }
+    navigate('/create_post');
+  };
+
   return (
     <article className="overflow-auto whitespace-pre-wrap break-words">
       <section className=" bg-gray-200 flex flex-col flex-1 gap-2 justify-center py-4 px-4 mb-3">
         <h1 className="pl-3 text-2xl">{title}</h1>
         <div className="flex justify-between items-center mt-4">
           <p className="pl-3 font-bold text-base">{name}</p>
-          <p className="text-base">
-            {date} {time}
-          </p>
+          <p className="text-base font-bold">{created_at}</p>
         </div>
       </section>
 
       <section className="bg-gray-200 h-auto p-8 border-b border-black mb-3">
-        <EditButtonDiv $editAuthority={isLoggedIn && postUserId === userId}>
+        <EditButtonDiv $editAuthority={isLoggedIn && postUserId === userId} className="mb-4">
           <button onClick={() => setIsEdit(true)}>수정</button> | <button onClick={handleDelete}>삭제</button>
         </EditButtonDiv>
         {imageUrls.length > 0
@@ -221,10 +231,10 @@ function ReadPost({ setIsEdit, targetData, postId, isEdit }) {
 
       <section className="h-[10vh] flex justify-center items-center gap-[2vw]">
         <button className="cursor-pointer text-2xl py-2 px-4 text-[1.4rem] font-bold" onClick={() => navigate(-1)}>
-          뒤로가기
-        </button>
-        <button className="cursor-pointer text-2xl py-2 px-4 text-[1.4rem] font-bold" onClick={() => navigate('/')}>
           홈
+        </button>
+        <button className="cursor-pointer text-2xl py-2 px-4 text-[1.4rem] font-bold" onClick={onMoveToCreatePost}>
+          글 작성
         </button>
       </section>
     </article>
