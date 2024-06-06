@@ -28,6 +28,7 @@ export const useCreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let hasError = false;
+    if (!title.trim()) 
     if (!title.trim()) {
       dispatch(setTitleError(titleErrorRef.current));
       hasError = true;

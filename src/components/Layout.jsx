@@ -10,7 +10,7 @@ function Layout() {
 
   const location = useLocation();
   return (
-    <main className="bg-white max-w-[1000px] min-x-[750px] mx-auto my-0">
+    <main className="bg-white max-w-[600px] mx-auto my-0">
       {location.pathname === '/' ? (
         <Header>
           <HomeButtons isLogIn={isLoggedIn} />
@@ -49,5 +49,4 @@ function HomeButtons({ isLogIn }) {
     </>
   );
 }
-
 export default Layout;

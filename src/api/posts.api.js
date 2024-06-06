@@ -28,6 +28,15 @@ class PostApi {
     return this.#getResult(response, []);
   }
 
+  async getMyPosts(userId) {
+    const response = await supabase
+      .from(this.#TABLE_NAME)
+      .select()
+      .order('id', { ascending: false })
+      .eq('name', userId);
+    return this.#getResult(response, []);
+  }
+
   async search(keyword) {
     const response = await supabase.from(this.#TABLE_NAME).select().like('title', `%${keyword}%`);
     return this.#getResult(response, []);
